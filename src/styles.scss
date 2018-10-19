@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.no-margin{
+	margin: 0px;
+}
+
+nav{
+	width: auto;
+}
+
+.block{
+	display: block;
+}
+
+.volledigeHoogte{
+	height: calc(100vh - 64px);
+}
