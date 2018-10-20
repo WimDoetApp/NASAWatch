@@ -14,3 +14,13 @@ nav{
 .volledigeHoogte{
 	height: calc(100vh - 64px);
 }
+
+.navigatieLI{
+	color: black;
+	font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+.navigatieLI:hover{
+	background-color: #64b5f6 !important;
+}

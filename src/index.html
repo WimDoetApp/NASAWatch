@@ -1,46 +1,51 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>NASAWatch</title>
-  <base href="/">
+	<meta charset="utf-8">
+	<title>NASAWatch</title>
+	<base href="/">
 
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <!--Optimize for mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--Optimize for mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta name="description" content="hallo">
+	<meta name="description" content="hallo">
 	<meta name="author" content="Wim Naudts">
-	  
+
 	<!-- Materialize import: Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<!-- Material icons import -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-	
-	<!-- Jquery import -->
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-</head>
-<body>
-  <app-root></app-root>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Materialize import: Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	
+	<!-- Jquery import -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	 crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<app-root></app-root>
+
+	<!-- Materialize import: Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 	<script>
 		//inklapbare sidenav initialiseren
-		$(document).ready(function(){
+		$(document).ready(function () {
 			$('.sidenav').sidenav();
 		});
-		
+
 		//accordions initialiseren
-		$(document).ready(function(){
+		$(document).ready(function () {
 			$('.collapsible').collapsible();
+		});
+
+		//modals initialiseren
+		$(document).ready(function () {
+			$('.modal').modal();
 		});
 	</script>
 </body>
+
 </html>
