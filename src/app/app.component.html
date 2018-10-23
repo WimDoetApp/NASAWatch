@@ -1,6 +1,6 @@
 <!-- Mobiele navigatie -->
 <ul class="sidenav noOverflow" id="mobile-demo">
-    <app-navbar></app-navbar>
+  <app-navbar></app-navbar>
 </ul>
 
 <!-- Pagina layout -->
@@ -28,6 +28,24 @@
     <!-- Content -->
     <div class="container">
       <router-outlet></router-outlet>
+
+      <!-- banner om app te installeren -->
+      <div class="row" *ngIf="showBanner">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Install</span>
+              <p>Do you want to download and install the site and add it to your homescreen?.</p>
+            </div>
+            <div class="card-action">
+                <button type="button" (click)="addToHomescreen()" class="modal-close waves-effect waves-green btn-flat">Agree</button>
+                <button type="button" (click="showBanner = !showBanner">Disagree</button>
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

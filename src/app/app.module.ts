@@ -8,6 +8,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ApodModule } from './apod/apod.module';
 import { ErrorModule } from './error/error.module';
 import { InfoModule } from './info/info.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { InfoModule } from './info/info.module';
     AppRoutingModule,
     ApodModule,
     ErrorModule,
-    InfoModule
+    InfoModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
