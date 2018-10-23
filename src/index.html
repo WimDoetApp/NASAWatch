@@ -24,26 +24,32 @@
 	 crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="documentBody">
 	<app-root></app-root>
 
 	<!-- Materialize import: Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 	<script>
-		//inklapbare sidenav initialiseren
 		$(document).ready(function () {
+			//inklapbare sidenav initialiseren
 			$('.sidenav').sidenav();
-		});
 
-		//accordions initialiseren
-		$(document).ready(function () {
+			//accordions initialiseren
 			$('.collapsible').collapsible();
+
+			//modals initialiseren
+			$('.modal').modal();
+
+			//margin van content bepalen
+			$('#inhoud').css('margin-left', $('#navbar').css('width'));
 		});
 
-		//modals initialiseren
-		$(document).ready(function () {
-			$('.modal').modal();
+		//margin van content bij resize aanpassen
+		$(window).resize(function () {
+			console.log($('#navbar').css('width'));
+			$('#inhoud').css('margin-left', $('#navbar').css('width'));
+			console.log($('#inhoud').css('margin-left'));
 		});
 	</script>
 </body>

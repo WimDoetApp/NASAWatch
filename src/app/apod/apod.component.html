@@ -1,1 +1,21 @@
-<h3>Astronomy picture of the day</h3>
+<div class="progress center" *ngIf="loading">
+    <div class="indeterminate"></div>
+</div>
+
+<div [hidden]="loading">
+    <h3>Astronomy picture of the day</h3>
+
+    <div class="row">
+        <div class="col s12 m7">
+            <div class="card">
+                <div class="card-image">
+                    <img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDay">
+                </div>
+                <div class="card-content">
+                    <p>{{ (pictureOfTheDay$ | async)?.explanation }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

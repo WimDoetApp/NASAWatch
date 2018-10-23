@@ -11,8 +11,18 @@ nav{
 	display: block;
 }
 
+.noOverflow{
+	overflow: hidden;
+}
+
+/*Navigatie die blijft staan*/
+.navbarPosition{
+	position: fixed;
+}
+
+/*navigatie over de volledigel lengte van de browser*/
 .volledigeHoogte{
-	height: calc(100vh - 64px);
+	height: 100vh;
 }
 
 .navigatieLI{
@@ -23,4 +33,9 @@ nav{
 
 .navigatieLI:hover{
 	background-color: #64b5f6 !important;
+}
+
+/*Om laders in het midden van de pagina te laten zien*/
+.center{
+	margin-top: 25%;
 }
