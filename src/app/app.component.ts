@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-root',
@@ -34,6 +36,20 @@ export class AppComponent implements OnInit {
       this.showBanner = true;
       console.log('this.showBanner', this.showBanner);
     });
+  }
+
+  openNav() {
+    if($('#mySidenav').hasClass('is-active')){
+      document.getElementById("mySidenav").style.width = "0";
+      $('#mySidenav').removeClass('is-active');
+      $('#burger').removeClass('is-active');
+      $('#main').removeClass('lowOpacity');
+    }else{
+      document.getElementById("mySidenav").style.width = "250px";
+      $('#mySidenav').addClass('is-active');
+      $('#burger').addClass('is-active');
+      $('#main').addClass('lowOpacity');
+    }
   }
 
   addToHomescreen() {

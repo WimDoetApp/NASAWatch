@@ -1,15 +1,37 @@
-<h3>Astronomy picture of the day</h3>
+<section class="hero is-info">
+    <div class="hero-body">
+        <h1 class="title">Astronomy picture of the day</h1>
+    </div>
+</section>
 
-<div class="progress center" *ngIf="loading">
-    <div class="indeterminate"></div>
-</div>
+<section class="hero is-light">
+    <div class="hero-body">
+        <div class="progress center" *ngIf="loading">
+            <div class="indeterminate"></div>
+        </div>
 
-<div [hidden]="loading">
+        <div [hidden]="loading">
+            <div class="column is-half">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDay" width="50%">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">Description</p>
+                            </div>
+                        </div>
 
-    <p><img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDay" class="responsive-img materialboxed"></p>
+                        <div class="content">
+                            {{ (pictureOfTheDay$ | async)?.explanation }}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <h5>Description</h5>
-
-    <p>{{ (pictureOfTheDay$ | async)?.explanation }}</p>
-
-</div>
+        </div>
+    </div>
+</section>
