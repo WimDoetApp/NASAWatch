@@ -38,20 +38,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  openNav() {
-    if($('#mySidenav').hasClass('is-active')){
-      document.getElementById("mySidenav").style.width = "0";
-      $('#mySidenav').removeClass('is-active');
-      $('#burger').removeClass('is-active');
-      $('#main').removeClass('lowOpacity');
-    }else{
-      document.getElementById("mySidenav").style.width = "250px";
-      $('#mySidenav').addClass('is-active');
-      $('#burger').addClass('is-active');
-      $('#main').addClass('lowOpacity');
-    }
-  }
-
   addToHomescreen() {
     this.deferredPrompt.prompt();
     this.deferredPrompt.userChoice.then((choiceResult) => {
@@ -64,5 +50,19 @@ export class AppComponent implements OnInit {
       this.deferredPrompt = null;
       this.showBanner = false;
     });
+  }
+
+  openNav() {
+    if($('#mySidenav').hasClass('is-active')){
+      document.getElementById("mySidenav").style.width = "0";
+      $('#mySidenav').removeClass('is-active');
+      $('#burger').removeClass('is-active');
+      $('#main').removeClass('lowOpacity');
+    }else{
+      document.getElementById("mySidenav").style.width = "250px";
+      $('#mySidenav').addClass('is-active');
+      $('#burger').addClass('is-active');
+      $('#main').addClass('lowOpacity');
+    }
   }
 }

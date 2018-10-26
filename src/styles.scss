@@ -57,12 +57,11 @@ nav.navbar {
 }
 
 /*Override bulma*/
-.is-info{
+.hero.is-info{
     background-image: linear-gradient(to right, $light-blue, $red);
 }
 
 /*Extra*/
-
 .list-no-style{
 	list-style-type: none !important;
 }
