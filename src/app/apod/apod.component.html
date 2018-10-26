@@ -6,32 +6,44 @@
 
 <section class="hero is-light">
     <div class="hero-body">
-        <div class="progress center" *ngIf="loading">
-            <div class="indeterminate"></div>
+        <div *ngIf="loading">
+            <div class="loader"></div>
         </div>
 
         <div [hidden]="loading">
-            <div class="column is-half">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDay" width="50%">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-4">Description</p>
-                            </div>
+            <div class="columns is-centered">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDay" width="50%"></a>
+                            </figure>
                         </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">Description</p>
+                                </div>
+                            </div>
 
-                        <div class="content">
-                            {{ (pictureOfTheDay$ | async)?.explanation }}
+                            <div class="content">
+                                {{ (pictureOfTheDay$ | async)?.explanation }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
+
+
+<div id="apodModal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content modalCustom">
+        <p class="image is-4by3">
+            <img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDayModal">
+        </p>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="toggleImageModal()"></button>
+</div>

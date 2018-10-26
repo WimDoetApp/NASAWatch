@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
+/*variabelen*/
+$dark-blue: #276cda;
+$light-blue: hsl(217, 75%, 58%);
+$light-grey: #e8e8e8;
+$red: #da2730;
+
 body{
 	background-color: whitesmoke;
 }
@@ -12,14 +18,14 @@ body{
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-	background-color: #e8e8e8;
+	background-color: $light-grey;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 nav.navbar {
-    border-top: 4px solid #276cda;
+    border-top: 4px solid $dark-blue;
     margin-bottom: 1rem;
 }
 
@@ -28,13 +34,39 @@ nav.navbar {
 }
 
 .menu a:hover{
-	color: hsl(217, 71%, 53%);
+	color: $light-blue;
 }
 
 .lowOpacity{
 	opacity: 0.5;
 }
 
+/*Loader*/
+.loader {
+    border: 16px solid $light-grey;
+    border-top: 16px solid $red; 
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*Override bulma*/
+.is-info{
+    background-image: linear-gradient(to right, $light-blue, $red);
+}
+
+/*Extra*/
+
 .list-no-style{
 	list-style-type: none !important;
+}
+
+.modalCustom{
+    top: 20% !important;
 }
