@@ -1,0 +1,21 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <h1 class="title">Near earth Asteroids</h1>
+  </div>
+</section>
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div *ngIf="loading">
+      <div class="loader"></div>
+    </div>
+
+    <div [hidden]="loading">
+      <div class="columns is-multiline">
+        <div class="column is-one-third" *ngFor="let asteroid of (getBrowse$ | async)?.near_earth_objects">
+          <app-neo-item [asteroid]="asteroid"></app-neo-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

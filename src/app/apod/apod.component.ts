@@ -38,4 +38,8 @@ export class ApodComponent implements OnInit {
       $('#apodModal').toggle('is-active');
     }
 
+    showOriginalImage(){
+
+    }
+
 }

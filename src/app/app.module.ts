@@ -10,6 +10,8 @@ import { ErrorModule } from './error/error.module';
 import { InfoModule } from './info/info.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NeoModule } from './neo/neo.module';
+import { NeoDetailModule } from './neo-detail/neo-detail.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { environment } from '../environments/environment';
     ApodModule,
     ErrorModule,
     InfoModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NeoModule,
+    NeoDetailModule
   ],
   providers: [],
   bootstrap: [AppComponent]

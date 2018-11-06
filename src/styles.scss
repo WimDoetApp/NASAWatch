@@ -63,9 +63,17 @@ nav.navbar {
 
 /*Extra*/
 .list-no-style{
-	list-style-type: none !important;
+    list-style-type: circle !important;
 }
 
 .modalCustom{
     top: 20% !important;
+}
+
+.no-margin{
+    margin: 0;
+}
+
+.text-red{
+    color: $red !important;
 }

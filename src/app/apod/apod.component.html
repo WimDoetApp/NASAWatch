@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDay" width="50%"></a>
+                                <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.url" alt="picOfTheDay" width="50%"></a>
                             </figure>
                         </div>
                         <div class="card-content">
@@ -42,7 +42,7 @@
     <div class="modal-background"></div>
     <div class="modal-content modalCustom">
         <p class="image is-4by3">
-            <img [src]="(pictureOfTheDay$ | async)?.hdurl" alt="picOfTheDayModal">
+            <img [src]="(pictureOfTheDay$ | async)?.url" alt="picOfTheDayModal">
         </p>
     </div>
     <button class="modal-close is-large" aria-label="close" (click)="toggleImageModal()"></button>

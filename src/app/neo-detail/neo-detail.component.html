@@ -1,0 +1,62 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <h1 class="title">Asteroid: {{ (getLookup$ | async)?.name }}</h1>
+  </div>
+</section>
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div *ngIf="loading">
+      <div class="loader"></div>
+    </div>
+
+    <div [hidden]="loading">
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <h5>First observation</h5>
+                <p>{{ (getLookup$ | async)?.orbital_data.first_observation_date }}</p>
+
+                <h5>Last observation:</h5>
+                <p>{{ (getLookup$ | async)?.orbital_data.last_observation_date }}</p>
+
+                <h5>Estimated diameter</h5>
+                <div class="columns">
+                  <div class="column">
+                    <h6>Min:</h6>
+                    <p>{{ (getLookup$ | async)?.estimated_diameter.kilometers.estimated_diameter_min }} km</p>
+                  </div>
+                  <div class="column">
+                    <h6>Max:</h6>
+                    <p>{{ (getLookup$ | async)?.estimated_diameter.kilometers.estimated_diameter_max }} km</p>
+                  </div>
+                </div>
+
+                <p><a href="{{ (getLookup$ | async)?.nasa_jpl_url }}" target="_blank" class="button is-info is-outlined">NASA
+                    JPL Database</a></p>
+
+                <h5 *ngIf="(getLookup$ | async)?.is_potentially_hazardous_asteroid == true" class="text-red"><i class="material-icons">report_problem</i>
+                  Potentially hazardous!</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns" *ngIf="(getLookup$ | async)?.close_approach_data.length > 0">
+        <div class="column">
+          <button class="button is-info is-outlined" type="button" (click)="showApproach = !showApproach">Show close
+            approach data</button>
+        </div>
+      </div>
+
+      <div class="columns is-multiline" *ngIf="showApproach">
+        <div class="column is-one-third" *ngFor="let approachDate of (getLookup$ | async)?.close_approach_data">
+          <app-neo-detail-item [approachDate]="approachDate"></app-neo-detail-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
