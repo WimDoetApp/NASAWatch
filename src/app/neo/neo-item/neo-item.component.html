@@ -7,7 +7,7 @@
     </div>
 
     <div class="content">
-      <ul>
+      <ul *ngIf="tab === '0'">
         <li class="list-no-style">Last observation: {{ asteroid.orbital_data.last_observation_date }}</li>
       </ul>
       <p><button class="button is-info is-outlined" type="button" (click)="lookupAsteroid()">More info</button></p>

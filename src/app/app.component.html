@@ -33,14 +33,17 @@
 <main class="container" id="main">
   <div class="columns no-margin">
     <div class="column is-3 is-hidden-touch">
+      <!-- Navbar -->
       <app-navbar></app-navbar>
     </div>
     <div class="column">
+      <!-- Componenten -->
       <router-outlet></router-outlet>
     </div>
   </div>
 </main>
 
+<!-- Banner voor PWA -->
 <footer class="footer">
   <div class="container">
     <div class="hero-body" *ngIf="showBanner">

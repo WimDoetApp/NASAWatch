@@ -9,6 +9,7 @@ import { Router } from '@angular/router'
 export class NeoItemComponent implements OnInit {
 
   @Input() asteroid: any;
+  @Input() tab:String;
 
   constructor(private router: Router) { }
 

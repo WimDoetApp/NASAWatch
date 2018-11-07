@@ -12,7 +12,7 @@ import { ErrorComponent } from './error/error.component';
 const routes: Routes = [
   {path: 'info', component: InfoComponent},
   {path: 'apod', component: ApodComponent},
-  {path: 'neo', component: NeoComponent},
+  {path: 'neo/:tab', component: NeoComponent},
   {path: 'neo-detail/:id', component: NeoDetailComponent},
   //homepage = apod
   {path: '', component: ApodComponent},

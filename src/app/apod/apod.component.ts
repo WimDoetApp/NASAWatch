@@ -3,8 +3,8 @@ import { ApodService } from '../services/apod.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-apod',
@@ -24,22 +24,17 @@ export class ApodComponent implements OnInit {
     this.getPicture();
   }
 
-  getPicture(){
+  getPicture() {
     this.loading = true;
     this.pictureOfTheDay$ = this.apodService.getPicture$()
-    .pipe(
-      finalize(() => {
-        this.loading = false;
-      })
-    )
-    }
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+  }
 
-    toggleImageModal(){
-      $('#apodModal').toggle('is-active');
-    }
-
-    showOriginalImage(){
-
-    }
-
+  toggleImageModal() {
+    $('#apodModal').toggle('is-active');
+  }
 }

@@ -7,7 +7,8 @@
     <li>
       <a>Asteroids</a>
       <ul>
-        <li><a routerLink="/neo" routerLinkActive="active" (click)="closeNav()">Browse</a></li>
+        <li><a [routerLink]="['/neo', 0]" routerLinkActive="active" (click)="closeNav()">Browse</a></li>
+        <li><a [routerLink]="['/neo', 1]" routerLinkActive="active" (click)="closeNav()">Feed</a></li>
       </ul>
     </li>
     <li>

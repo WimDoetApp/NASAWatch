@@ -8,7 +8,7 @@ import { catchError, share, tap } from 'rxjs/operators';
 })
 export class NeoService {
 
-  readonly ROOT_URL = 'https://api.nasa.gov/neo/rest/v1/neo/';
+  readonly ROOT_URL = 'https://api.nasa.gov/neo/rest/v1/';
   readonly API_KEY = 'DMXNZH9gUgbKTDCBVr0KPtEoBUevokKx8cvx3sjN';
 
   constructor(private http: HttpClient) { }
@@ -17,7 +17,27 @@ export class NeoService {
     const params = new HttpParams()
       .set('api_key', this.API_KEY);
 
-    return this.http.get(this.ROOT_URL + "browse", { params })
+    return this.http.get(this.ROOT_URL + "neo/browse", { params })
+      .pipe(
+        tap(req => console.log('get-request', req)),
+        catchError(
+          (error) => {
+            console.log(error);
+            alert(error.message);
+            return EMPTY;
+          }),
+        share()
+      );
+  }
+
+  getFeed$(start_date){
+    const params = new HttpParams()
+      .set('api_key', this.API_KEY)
+      .set('start_date', start_date);
+
+      console.log(this.ROOT_URL + "feed" + params);
+
+      return this.http.get<any>(this.ROOT_URL + "feed", { params })
       .pipe(
         tap(req => console.log('get-request', req)),
         catchError(
@@ -34,7 +54,7 @@ export class NeoService {
     const params = new HttpParams()
       .set('api_key', this.API_KEY);
 
-      return this.http.get(this.ROOT_URL + id, { params })
+      return this.http.get(this.ROOT_URL + "neo/" + id, { params })
       .pipe(
         tap(req => console.log('get-request', req)),
         catchError(

@@ -1,43 +1,34 @@
+<!-- Titel -->
 <section class="hero is-info">
     <div class="hero-body">
         <h1 class="title">Astronomy picture of the day</h1>
     </div>
 </section>
 
+<!-- Content -->
 <section class="hero is-light">
     <div class="hero-body">
+        <!-- Loader laten zien terwijl we een api request doen -->
         <div *ngIf="loading">
             <div class="loader"></div>
         </div>
 
+        <!-- De content als we de data van de api ontvangen hebben -->
         <div [hidden]="loading">
-            <div class="columns is-centered">
-                <div class="column is-half">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.url" alt="picOfTheDay" width="50%"></a>
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">Description</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                {{ (pictureOfTheDay$ | async)?.explanation }}
-                            </div>
-                        </div>
-                    </div>
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                    <figure class="image">
+                        <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.url" alt="picOfTheDay"></a>
+                    </figure>
+                    <p class="title">Description</p>
+                    <p>{{ (pictureOfTheDay$ | async)?.explanation }}</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-
+<!-- Image modal -->
 <div id="apodModal" class="modal">
     <div class="modal-background"></div>
     <div class="modal-content modalCustom">

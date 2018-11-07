@@ -1,19 +1,79 @@
+<!-- Titel -->
 <section class="hero is-info">
   <div class="hero-body">
     <h1 class="title">Near earth Asteroids</h1>
   </div>
 </section>
 
+<!-- Content -->
 <section class="hero is-light">
   <div class="hero-body">
+    <!-- Loader laten zien terwijl we een api request doen -->
     <div *ngIf="loading">
       <div class="loader"></div>
     </div>
 
+    <!-- De content als we de data van de api ontvangen hebben -->
     <div [hidden]="loading">
-      <div class="columns is-multiline">
-        <div class="column is-one-third" *ngFor="let asteroid of (getBrowse$ | async)?.near_earth_objects">
-          <app-neo-item [asteroid]="asteroid"></app-neo-item>
+      <!-- Switch om te zien welke tab we willen laten zien-->
+      <div [ngSwitch]="currentTab">
+        <!-- Browse tab -->
+        <div *ngSwitchCase="0">
+          <!-- Info -->
+          <div class="columns">
+            <div class="column">
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-info">
+                  <p>Browse the overall asteroid data-set.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="columns is-multiline">
+            <!-- Child component voor elk object -->
+            <div class="column is-one-third" *ngFor="let asteroid of (getData$ | async)?.near_earth_objects">
+              <app-neo-item [asteroid]="asteroid" [tab]="currentTab"></app-neo-item>
+            </div>
+          </div>
+        </div>
+        <!-- Feed tab -->
+        <div *ngSwitchCase="1">
+          <!-- Info -->
+          <div class="columns">
+            <div class="column">
+              <p>Retrieve a list of Asteroids based on their closest approach date to Earth. Choose a start date and
+                get a list of a 7 day period.</p>
+            </div>
+            <div class="column">
+              <!-- Formulier om datum te kiezen -->
+              <form #selectDate = "ngForm" (ngSubmit)="onSubmitDatum(selectDate.value)" >
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-info">
+                    <p class="subtitle">
+                      <label class="label has-text-white">Date</label>
+                      <input class="input is-success" type="date" name="datum" ngModel>
+                    </p>
+                    <p class="subtitle"><button class="button is-light" type="submit">Submit</button></p>
+                  </article>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Itereren over verschillende datums -->
+          <div *ngFor="let datum of dataArray; index as i">
+            <div class="columns">
+              <div class="column">
+                <!-- Elke datum als titel weergeven -->
+                <h3 class="subtitle is-3">{{ dataProps[i] }}</h3>
+              </div>
+            </div>
+            <div class="columns is-multiline">
+              <!-- Voor elke datum voor alle objecten de child component laten zien -->
+              <div class="column is-one-third" *ngFor="let asteroid of datum">
+                <app-neo-item [asteroid]="asteroid" [tab]="currentTab"></app-neo-item>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

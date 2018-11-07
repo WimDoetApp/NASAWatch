@@ -14,6 +14,8 @@ export class NeoDetailComponent implements OnInit {
 
   id: String;
   private sub: any;
+  showApproach = false;
+
   loading = false;
   getLookup$: Observable<any>;
   subscription: Subscription;

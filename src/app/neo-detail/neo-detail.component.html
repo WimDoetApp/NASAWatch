@@ -1,3 +1,4 @@
+<!-- Titel -->
 <section class="hero is-info">
   <div class="hero-body">
     <h1 class="title">Asteroid: {{ (getLookup$ | async)?.name }}</h1>
@@ -6,10 +7,12 @@
 
 <section class="hero is-light">
   <div class="hero-body">
+    <!-- Loader laten zien terwijl we een api request doen -->
     <div *ngIf="loading">
       <div class="loader"></div>
     </div>
 
+    <!-- De content als we de data van de api ontvangen hebben -->
     <div [hidden]="loading">
       <div class="columns">
         <div class="column">
