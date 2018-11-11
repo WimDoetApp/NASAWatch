@@ -1,0 +1,86 @@
+<!-- Titel -->
+<section class="hero is-info">
+  <div class="hero-body">
+    <h1 class="title">Login</h1>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="hero is-light">
+  <div class="hero-body">
+
+    <!-- Message -->
+    <div class="columns">
+      <div class="column is-one-third">
+        <div class="tile is-parent" *ngIf="alertBox">
+          <article class="tile is-child notification" [ngClass]="alertBox.color" >
+            <div class="columns">
+              <div class="column">
+                  <p [innerHTML]="alertBox.message"></p>
+              </div>
+              <div class="column">
+                  <button class="button is-primary" type="button" (click)="authService.clearMessage();"><span aria-hidden="true">&times;</span></button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- social logins -->
+    <div class="columns">
+      <div class="column">
+        <button class="button is-primary is-outlined" (click)="authService.googleLogin()"><i class="fab fa-google-plus-g"></i>&nbsp;Login
+          with google</button>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="columns">
+      <div class="column">
+        <form #f="ngForm">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="email" name="email" id="email" placeholder="Email input" required
+                pattern="\S+@\S+\.\S+" #email="ngModel" [(ngModel)]="loginData.email">
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="password" name="password" id="password" placeholder="Password (6+ characters)"
+                required minlength="6" #password="ngModel" [(ngModel)]="loginData.password">
+              <span class="icon is-small is-left">
+                <i class="fas fa-key"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="columns">
+              <div class="control column">
+                <button class="button is-link" (click)="emailLogin(f.value, f.valid)">Login</button>
+              </div>
+              <div class="control column">
+                <button class="button is-link" (click)="emailSignUp(f.value, f.valid)">Sign up</button>
+              </div>
+              <div class="control column">
+                <button class="button is-link" (click)="authService.emailResetPassword(email.value)">Reset password</button>
+              </div>
+              <div class="control column">
+                <button class="button is-text" (click)="authService.logout()">Logout</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+

@@ -29,6 +29,10 @@ nav.navbar {
     margin-bottom: 1rem;
 }
 
+.nav-icon{
+    color: black;
+}
+
 .menu{
 	font-weight: bold;
 }
@@ -76,4 +80,8 @@ nav.navbar {
 
 .text-red{
     color: $red !important;
+}
+
+.font-30{
+    font-size: 30px !important;
 }

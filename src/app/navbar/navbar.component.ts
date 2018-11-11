@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import {User} from '../interfaces/user';
 declare var jquery:any;
 declare var $ :any;
 
@@ -9,9 +11,13 @@ declare var $ :any;
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  isCollapsed = true;
+  user: User;
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.userData$.subscribe( data => this.user = data);
   }
 
   closeNav(){

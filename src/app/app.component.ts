@@ -65,4 +65,11 @@ export class AppComponent implements OnInit {
       $('#main').addClass('lowOpacity');
     }
   }
+
+  closeNav(){
+    document.getElementById("mySidenav").style.width = "0";
+    $('#mySidenav').removeClass('is-active');
+    $('#burger').removeClass('is-active');
+    $('#main').removeClass('lowOpacity');
+  }
 }

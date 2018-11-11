@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 //importeren componenten van de app
+import { LoginComponent } from './login/login.component';
 import { InfoComponent } from './info/info.component';
 import { ApodComponent } from './apod/apod.component';
 import { NeoComponent } from './neo/neo.component';
@@ -10,6 +11,7 @@ import { NeoDetailComponent } from './neo-detail/neo-detail.component';
 import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: 'info', component: InfoComponent},
   {path: 'apod', component: ApodComponent},
   {path: 'neo/:tab', component: NeoComponent},

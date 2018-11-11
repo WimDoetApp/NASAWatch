@@ -1,6 +1,14 @@
 <!-- Mobiele navigatie -->
 <div id="mySidenav" class="sidenav">
   <div class="hero-body">
+    <app-user-info></app-user-info>
+    <aside class="menu">
+      <p class="menu-label">
+        General
+      </p>
+        <a routerLink="/info" routerLinkActive="active" (click)="closeNav()" class="nav-icon"><i class="material-icons font-30">info</i></a>
+        <a routerLink="/login" routerLinkActive="active" (click)="closeNav()" class="nav-icon"><i class="material-icons font-30">account_circle</i></a>
+    </aside>
     <app-navbar></app-navbar>
   </div>
 </div>
@@ -23,6 +31,7 @@
 
     <div class="navbar-menu">
       <div class="navbar-end">
+        <a routerLink="/login" routerLinkActive="active" class="navbar-item"><i class="material-icons">account_circle</i></a>
         <a routerLink="/info" routerLinkActive="active" class="navbar-item"><i class="material-icons">info</i></a>
       </div>
     </div>
@@ -34,6 +43,7 @@
   <div class="columns no-margin">
     <div class="column is-3 is-hidden-touch">
       <!-- Navbar -->
+      <app-user-info></app-user-info>
       <app-navbar></app-navbar>
     </div>
     <div class="column">

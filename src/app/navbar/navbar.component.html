@@ -1,6 +1,14 @@
+<aside class="menu"> 
+  <p class="menu-label">USER</p>
+  <ul class="menu-list">
+    <li *ngIf="!user"><a routerLink="/login" routerLinkActive="active" (click)="closeNav()">Login</a></li>
+    <li *ngIf="user"><a (click)="authService.logout();closeNav()">Logout</a></li>
+  </ul>
+</aside>
+
 <aside class="menu">
   <p class="menu-label">
-    General
+    API
   </p>
   <ul class="menu-list">
     <li><a routerLink="/apod" routerLinkActive="active" (click)="closeNav()">Astronomy picture of the day</a></li>
@@ -9,10 +17,8 @@
       <ul>
         <li><a [routerLink]="['/neo', 0]" routerLinkActive="active" (click)="closeNav()">Browse</a></li>
         <li><a [routerLink]="['/neo', 1]" routerLinkActive="active" (click)="closeNav()">Feed</a></li>
+        <li *ngIf="user"><a>My asteroids</a></li>
       </ul>
-    </li>
-    <li>
-        <a routerLink="/info" routerLinkActive="active" class="navbar-item" (click)="closeNav()"><i class="material-icons">info</i> Info</a>
     </li>
   </ul>
 </aside>
