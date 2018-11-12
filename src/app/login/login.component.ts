@@ -11,7 +11,10 @@ export class LoginComponent implements OnInit {
 
   loginData = {
     email: '',
-    password: ''
+    password: '',
+    signupMail: '',
+    singupPassword: '',
+    passwordConfirm: ''
   };
 
   alertBox: AlertBox = {
@@ -32,8 +35,8 @@ export class LoginComponent implements OnInit {
 
   emailSignUp(data: any, isValid: string) {
     this.authService.clearMessage();
-    if (isValid) {
-      this.authService.emailSignUp(data.email, data.password);
+    if (isValid && data.singupPassword == data.passwordConfirm) {
+      this.authService.emailSignUp(data.signupMail, data.singupPassword);
       localStorage.setItem('login', JSON.stringify(data));
     } else {
       this.authService.setMessage('Email/password not valid', 'is-danger');

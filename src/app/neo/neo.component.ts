@@ -3,7 +3,10 @@ import { NeoService } from '../services/neo.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { User } from '../interfaces/user';
 import { finalize, map } from 'rxjs/operators';
+import { UserAsteroidService } from '../services/user-asteroid.service';
 
 @Component({
   selector: 'app-neo',
@@ -25,13 +28,18 @@ export class NeoComponent implements OnInit {
   //arrays
   dataArray = [];
   dataProps = [];
+  asteroidIds = [];
 
   //andere
   today = new Date().toISOString().slice(0, 10);
   loading = false;
   pictureUrl = "";
 
-  constructor(private neoService: NeoService, private route: ActivatedRoute) { }
+  //user & db
+  user: User;
+  userAsteroid$: Observable<any>;
+
+  constructor(private neoService: NeoService, private route: ActivatedRoute, private authService: AuthService, public userAsteroidService: UserAsteroidService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -44,6 +52,9 @@ export class NeoComponent implements OnInit {
           break;
         case "1":
           this.getFeed(this.today);
+          break;
+        case "2":
+          this.getUserFeed();
           break;
       }
     });
@@ -65,14 +76,14 @@ export class NeoComponent implements OnInit {
     this.loading = true;
     this.getData$ = this.neoService.getFeed$(date)
       .pipe(
-        map( data => {
+        map(data => {
           console.log("Near earth objects:", data.near_earth_objects);
 
           //de data in een array zetten zodat we erover kunnen itereren met *ngFo
           this.dataProps = Object.keys(data.near_earth_objects);
           console.log(this.dataProps);
 
-          for (let prop of this.dataProps){
+          for (let prop of this.dataProps) {
             this.dataArray.push(data.near_earth_objects[prop]);
           }
 
@@ -88,8 +99,23 @@ export class NeoComponent implements OnInit {
   }
 
   //bij gekozen datum opnieuw request naar de api
-  onSubmitDatum(data){
+  onSubmitDatum(data) {
     console.log(data.datum);
-    this.getFeed(this.today);
+    this.getFeed(data.datum);
+  }
+
+  //feed voor een user
+  getUserFeed() {
+    this.authService.userData$.subscribe(data => this.user = data);
+    this.userAsteroid$ = this.userAsteroidService.getAsteroids();
+
+    this.userAsteroid$.subscribe(asteroids => {
+      asteroids.forEach(document => {
+        if (document.userId == this.user.uid) {
+          console.log(document.asteroidId);
+          this.dataArray.push(document.asteroidId);
+        }
+      });
+    })
   }
 }

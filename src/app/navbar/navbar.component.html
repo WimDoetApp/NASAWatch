@@ -17,7 +17,7 @@
       <ul>
         <li><a [routerLink]="['/neo', 0]" routerLinkActive="active" (click)="closeNav()">Browse</a></li>
         <li><a [routerLink]="['/neo', 1]" routerLinkActive="active" (click)="closeNav()">Feed</a></li>
-        <li *ngIf="user"><a>My asteroids</a></li>
+        <li *ngIf="user"><a [routerLink]="['/neo', 2]" routerLinkActive="active" (click)="closeNav()">My asteroids</a></li>
       </ul>
     </li>
   </ul>

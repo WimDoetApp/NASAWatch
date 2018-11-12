@@ -17,6 +17,7 @@
     <div [hidden]="loading">
       <!-- Switch om te zien welke tab we willen laten zien-->
       <div [ngSwitch]="currentTab">
+
         <!-- Browse tab -->
         <div *ngSwitchCase="0">
           <!-- Info -->
@@ -36,6 +37,7 @@
             </div>
           </div>
         </div>
+
         <!-- Feed tab -->
         <div *ngSwitchCase="1">
           <!-- Info -->
@@ -74,6 +76,11 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- My asteroids tab -->
+        <div *ngSwitchCase="2">
+          <p>Hey</p>
         </div>
       </div>
     </div>

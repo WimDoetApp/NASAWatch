@@ -30,14 +30,15 @@ export class NeoService {
       );
   }
 
-  getFeed$(start_date){
+  getFeed$(start_date) {
     const params = new HttpParams()
       .set('api_key', this.API_KEY)
       .set('start_date', start_date);
 
-      console.log(this.ROOT_URL + "feed" + params);
+    console.log("query:", this.ROOT_URL + "feed" + params);
+    console.log("datum: ", start_date);
 
-      return this.http.get<any>(this.ROOT_URL + "feed", { params })
+    return this.http.get<any>(this.ROOT_URL + "feed", { params })
       .pipe(
         tap(req => console.log('get-request', req)),
         catchError(
@@ -54,7 +55,7 @@ export class NeoService {
     const params = new HttpParams()
       .set('api_key', this.API_KEY);
 
-      return this.http.get(this.ROOT_URL + "neo/" + id, { params })
+    return this.http.get(this.ROOT_URL + "neo/" + id, { params })
       .pipe(
         tap(req => console.log('get-request', req)),
         catchError(
