@@ -16,7 +16,6 @@ export class UserAsteroidService {
 
   user: User;
   userAsteroid$: Observable<UserAsteroid[]>;
-  lol: Observable<any>;
 
   constructor(private afs: AngularFirestore, private authService: AuthService) {
     this.userAsteroid$ = this.afs.collection<UserAsteroid>(this.collection).valueChanges();
@@ -39,7 +38,9 @@ export class UserAsteroidService {
     );
   }
 
-  deleteAsteroid(asteroid) {
+  deleteAsteroid(id) {
+    var asteroid = id; //asteroid zoeken op id
+
     if (this.user.uid == asteroid.userId) {
       const path = this.collection + '/' + asteroid.neoKey;
       this.afs.doc(path).delete().catch(

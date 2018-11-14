@@ -10,7 +10,7 @@ declare var $ :any;
 })
 export class AppComponent implements OnInit {
 
-  title = 'projectNASAWatch';
+  title = 'NASAWatch';
 
   showBanner = false;
   deferredPrompt: any;

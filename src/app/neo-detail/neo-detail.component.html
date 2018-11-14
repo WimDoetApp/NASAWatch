@@ -14,9 +14,12 @@
 
     <!-- De content als we de data van de api ontvangen hebben -->
     <div [hidden]="loading">
-      <div class="columns" *ngIf="!hasAsteroid && user">
-        <div class="column">
+      <div class="columns">
+        <div class="column" *ngIf="!hasAsteroid && user">
             <button class="button is-primary is-outlined" type="button" (click)="addAsteroid(id)">Add to my asteroids</button>
+        </div>
+        <div class="column" *ngIf="hasAsteroid && user">
+            <button class="button is-danger is-outlined" type="button" (click)="removeAsteroid(id)">Remove from my asteroids</button>
         </div>
       </div>
 

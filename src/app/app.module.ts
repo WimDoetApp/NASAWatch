@@ -25,7 +25,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   declarations: [
     AppComponent,
     NavbarComponent,
-    UserInfoComponent
+    UserInfoComponent,
   ],
   imports: [
     HttpClientModule,

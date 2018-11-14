@@ -48,7 +48,7 @@
             </div>
             <div class="column">
               <!-- Formulier om datum te kiezen -->
-              <form #selectDate = "ngForm" (ngSubmit)="onSubmitDatum(selectDate.value)" >
+              <form #selectDate="ngForm" (ngSubmit)="onSubmitDatum(selectDate.value)">
                 <div class="tile is-parent">
                   <article class="tile is-child notification is-info">
                     <p class="subtitle">
@@ -80,7 +80,22 @@
 
         <!-- My asteroids tab -->
         <div *ngSwitchCase="2">
-          <p>Hey</p>
+          <!-- Info -->
+          <div class="columns">
+            <div class="column">
+              <div class="tile is-parent">
+                <article class="tile is-child notification is-info">
+                  <p>A list of asteroids you saved.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <!-- Asteroids itereren -->
+          <div class="columns is-multiline">
+            <div class="column is-one-third" *ngFor="let asteroid of dataUserArray">
+              <app-neo-item [asteroid]="asteroid" [tab]="currentTab"></app-neo-item>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApodService } from '../services/apod.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 declare var jquery: any;
 declare var $: any;
 
@@ -16,7 +16,7 @@ export class ApodComponent implements OnInit {
   loading = false;
   pictureOfTheDay$: Observable<any>;
   pictureUrl = "";
-  subscription: Subscription;
+  media_type = "";
 
   constructor(private apodService: ApodService) { }
 
@@ -28,6 +28,12 @@ export class ApodComponent implements OnInit {
     this.loading = true;
     this.pictureOfTheDay$ = this.apodService.getPicture$()
       .pipe(
+        map( data => {
+          this.media_type = data.media_type;
+          console.log(this.media_type);
+
+          return data;
+        }),
         finalize(() => {
           this.loading = false;
         })

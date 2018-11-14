@@ -16,8 +16,7 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe((user) => {
       this.setUserData(user);
-    }
-    );
+    });
   }
 
   // Email/password sing up
@@ -99,6 +98,7 @@ export class AuthService {
     } else {
       this.userData$.next(null);
     }
+    //console.trace();
   }
 
   // Debug-info op loginpagina

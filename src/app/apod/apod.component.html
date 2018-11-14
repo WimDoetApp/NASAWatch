@@ -17,9 +17,16 @@
         <div [hidden]="loading">
             <div class="tile is-parent">
                 <div class="tile is-child box">
-                    <figure class="image">
-                        <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.url" alt="picOfTheDay"></a>
-                    </figure>
+                    <div [ngSwitch]="media_type">
+                        <div *ngSwitchCase="'image'">
+                            <figure class="image">
+                                <a (click)="toggleImageModal()"><img [src]="(pictureOfTheDay$ | async)?.url" alt="picOfTheDay"></a>
+                            </figure>
+                        </div>
+                        <div *ngSwitchCase="'video'">
+                            <p>Hey how is it</p>
+                        </div>
+                    </div>
                     <p class="title">Description</p>
                     <p>{{ (pictureOfTheDay$ | async)?.explanation }}</p>
                 </div>
