@@ -39,13 +39,18 @@ export class UserAsteroidService {
   }
 
   deleteAsteroid(id) {
-    var asteroid = id; //asteroid zoeken op id
-
-    if (this.user.uid == asteroid.userId) {
-      const path = this.collection + '/' + asteroid.neoKey;
-      this.afs.doc(path).delete().catch(
-        error => console.error('Error writing document: ', error)
-      );
-    }
+    //asteroiden met deze id ophalen
+    var asteroidSubscription = this.afs.collection<any>(this.collection, ref => ref.where('asteroidId', '==', id)).valueChanges().subscribe(asteroidCollection => {
+      asteroidCollection.forEach(asteroid => {
+        //van deze asteroiden bepalen of ze door deze user zijn opgeslagen
+        if (this.user.uid == asteroid.userId) {
+          const path = this.collection + '/' + asteroid.neoKey;
+          this.afs.doc(path).delete().catch(
+            error => console.error('Error writing document: ', error)
+          );
+        }
+      });
+      asteroidSubscription.unsubscribe();
+    });
   }
 }
