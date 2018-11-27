@@ -38,9 +38,9 @@
     <!-- Form -->
     <div class="columns">
       <div class="column">
-        <form #f="ngForm">
-          <div class="columns">
-            <div class="column">
+        <div class="columns">
+          <div class="column">
+            <form #f="ngForm">
               <h4 class="title is-4">Login</h4>
 
               <div class="field">
@@ -78,16 +78,18 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
+          </div>
 
-            <div class="column">
+          <div class="column">
+            <form #f2="ngForm">
               <h4 class="title is-4">Register</h4>
 
               <div class="field">
                 <label class="label">Email</label>
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input" type="email" name="signupMail" id="signupMail" placeholder="Email input" required pattern="\S+@\S+\.\S+"
-                    #signupMail="ngModel" [(ngModel)]="registerData.signupMail">
+                  <input class="input" type="email" name="signupMail" id="signupMail" placeholder="Email input"
+                    required pattern="\S+@\S+\.\S+" #signupMail="ngModel" [(ngModel)]="registerData.signupMail">
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                   </span>
@@ -119,13 +121,13 @@
               <div class="field is-grouped">
                 <div class="columns">
                   <div class="control column">
-                    <button class="button is-link" (click)="emailSignUp(f.value, f.valid)">Sign up</button>
+                    <button class="button is-link" (click)="emailSignUp(f2.value, f.valid)">Sign up</button>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
 
