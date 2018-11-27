@@ -14,6 +14,7 @@ import { LoginModule } from './login/login.module';
 import { ApodModule } from './apod/apod.module';
 import { ErrorModule } from './error/error.module';
 import { InfoModule } from './info/info.module';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NeoModule } from './neo/neo.module';
 import { NeoDetailModule } from './neo-detail/neo-detail.module';
 
@@ -26,6 +27,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AppComponent,
     NavbarComponent,
     UserInfoComponent,
+    UserDetailComponent,
   ],
   imports: [
     HttpClientModule,

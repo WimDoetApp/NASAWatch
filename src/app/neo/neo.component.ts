@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NeoService } from '../services/neo.service';
+import { NeoService } from '../_services/neo.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { User } from '../interfaces/user';
+import { AuthService } from '../_services/auth.service';
+import { User } from '../_interfaces/user';
 import { finalize, map } from 'rxjs/operators';
-import { UserAsteroidService } from '../services/user-asteroid.service';
+import { UserAsteroidService } from '../_services/user-asteroid.service';
 
 @Component({
   selector: 'app-neo',
@@ -61,7 +61,7 @@ export class NeoComponent implements OnInit {
         case "1":
           this.getFeed(this.today);
           break;
-        case "2":
+        case "11":
           this.showUserFeed();
           break;
       }
@@ -167,7 +167,7 @@ export class NeoComponent implements OnInit {
   //feed van de user laten zien
   showUserFeed() {
     //van tab veranderen
-    this.currentTab = "2";
+    this.currentTab = "11";
     console.log("we laten de user feed zien!");
   }
 }

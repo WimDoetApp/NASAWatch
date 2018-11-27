@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApodService } from '../services/apod.service';
+import { ApodService } from '../_services/apod.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';

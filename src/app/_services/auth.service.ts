@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../interfaces/user';
-import { AlertBox } from '../interfaces/alert-box';
+import { User } from '../_interfaces/user';
+import { AlertBox } from '../_interfaces/alert-box';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   alertBox$: BehaviorSubject<AlertBox> = new BehaviorSubject(null);
   userData$: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
     this.afAuth.authState.subscribe((user) => {
       this.setUserData(user);
     });
@@ -95,6 +96,7 @@ export class AuthService {
         photoURL: user.photoURL || '/assets/icons/icon-72x72.png',
         email: user.email,
       });
+      this.router.navigate(['/user']);
     } else {
       this.userData$.next(null);
     }

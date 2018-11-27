@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
-import { AuthService } from '../services/auth.service';
-import { UserAsteroid } from '../interfaces/user-asteroid';
-import { User } from '../interfaces/user';
+import { AuthService } from '../_services/auth.service';
+import { UserAsteroid } from '../_interfaces/user-asteroid';
+import { User } from '../_interfaces/user';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 

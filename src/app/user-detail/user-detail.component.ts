@@ -3,13 +3,12 @@ import { AuthService } from '../_services/auth.service';
 import { User } from '../_interfaces/user';
 
 @Component({
-  selector: 'app-user-info',
-  templateUrl: './user-info.component.html',
+  selector: 'app-user-detail',
+  templateUrl: './user-detail.component.html',
   styles: []
 })
-export class UserInfoComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
 
-  isCollapsed = true;
   user: User;
 
   constructor(public authService: AuthService) { }
