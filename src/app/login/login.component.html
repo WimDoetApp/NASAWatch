@@ -87,7 +87,7 @@
                 <label class="label">Email</label>
                 <div class="control has-icons-left has-icons-right">
                   <input class="input" type="email" name="signupMail" id="signupMail" placeholder="Email input" required pattern="\S+@\S+\.\S+"
-                    #signupMail="ngModel" [(ngModel)]="loginData.signupMail">
+                    #signupMail="ngModel" [(ngModel)]="registerData.signupMail">
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                   </span>
@@ -98,7 +98,7 @@
                 <label class="label">Password</label>
                 <div class="control has-icons-left has-icons-right">
                   <input class="input" type="password" name="singupPassword" id="singupPassword" placeholder="Password (6+ characters)"
-                    required minlength="6" #singupPassword="ngModel" [(ngModel)]="loginData.singupPassword">
+                    required minlength="6" #singupPassword="ngModel" [(ngModel)]="registerData.singupPassword">
                   <span class="icon is-small is-left">
                     <i class="fas fa-key"></i>
                   </span>
@@ -109,7 +109,7 @@
                 <label class="label">Confirm password</label>
                 <div class="control has-icons-left has-icons-right">
                   <input class="input" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="repeat password"
-                    required minlength="6" #passwordConfirm="ngModel" [(ngModel)]="loginData.passwordConfirm">
+                    required minlength="6" #passwordConfirm="ngModel" [(ngModel)]="registerData.passwordConfirm">
                   <span class="icon is-small is-left">
                     <i class="fas fa-key"></i>
                   </span>
