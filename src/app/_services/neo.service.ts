@@ -13,10 +13,12 @@ export class NeoService {
 
   constructor(private http: HttpClient) { }
 
-  getBrowse$(): Observable<any> {
+  getBrowse$(pageSize?, page?): Observable<any> {
     const params = new HttpParams()
-      .set('api_key', this.API_KEY);
-
+      .set('api_key', this.API_KEY)
+      .set('size', pageSize || "20")
+      .set('page', page || "1");
+      
     return this.http.get(this.ROOT_URL + "neo/browse", { params })
       .pipe(
         tap(req => console.log('get-request', req)),

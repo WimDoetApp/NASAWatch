@@ -35,6 +35,9 @@ export class NeoComponent implements OnInit {
   today = new Date().toISOString().slice(0, 10);
   loading = false;
   pictureUrl = "";
+  neoPageSize = "";
+  currentPage = 1;
+  numberOfPages = 1;
 
   //user & db
   user: User;
@@ -69,19 +72,62 @@ export class NeoComponent implements OnInit {
   }
 
   //data ophalen voor browse tab
-  getBrowse() {
-    console.log('testBrowse');
+  getBrowse(pageSize?, page?) {
+    //checken of er al een pagesize gekozen is
+    this.neoPageSize = localStorage.getItem('neoPageSize');
+    if(this.neoPageSize != null){
+      pageSize = this.neoPageSize;
+    }
+    console.log(page);
     //van tab veranderen
     this.currentTab = "0";
     this.loading = true;
-    this.getData$ = this.neoService.getBrowse$()
+    this.getData$ = this.neoService.getBrowse$(pageSize, page)
       .pipe(
+        map(data => {
+          this.numberOfPages = data.page.total_pages;
+
+          return data;
+        }),
         finalize(() => {
           this.loading = false;
         })
       )
 
     this.getData$.subscribe();
+  }
+
+  //om door aantal te itereren
+  counter(i: number){
+    return new Array(i);
+  }
+
+  //aantal items in pagina kiezen
+  onSubmitPageSize(data){
+    localStorage.setItem('neoPageSize', data.pageSize);
+    this.getBrowse(data.pageSize);
+  }
+
+  //pagina kiezen
+  choosePage(page){
+    this.currentPage = page;
+    this.getBrowse(null, page);
+  }
+
+  //volgende pagina
+  nextPage(){
+    if(this.currentPage != this.numberOfPages-1){
+      this.currentPage = this.currentPage+1;
+      this.getBrowse(null, this.currentPage);
+    }
+  }
+
+  //vorige pagina
+  previousPage(){
+    if(this.currentPage != 1){
+      this.currentPage = this.currentPage-1;
+      this.getBrowse(null, this.currentPage);
+    }
   }
 
   //data ophalen voor feed tab
