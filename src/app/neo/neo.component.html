@@ -20,8 +20,8 @@
 
         <!-- TAB 1: Browse tab -->
         <div *ngSwitchCase="0">
-          <!-- Info -->
           <div class="columns">
+            <!-- Info -->
             <div class="column">
               <div class="tile is-parent">
                 <article class="tile is-child notification is-info">
@@ -29,8 +29,9 @@
                 </article>
               </div>
             </div>
-            <form #selectPageSize="ngForm" (ngSubmit)="onSubmitPageSize(selectPageSize.value)">
-              <div class="column">
+            <!-- Invoer -->
+            <div class="column">
+              <form #selectPageSize="ngForm" (ngSubmit)="onSubmitPageSize(selectPageSize.value)">
                 <div class="content">
                   <p>
                     <label class="label">Items per page (max. 20)</label>
@@ -39,8 +40,8 @@
                   </p>
                   <p><button class="button is-primary" type="submit">Submit</button></p>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
           <div class="columns is-multiline">
             <!-- Child component voor elk object -->

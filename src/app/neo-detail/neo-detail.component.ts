@@ -43,9 +43,7 @@ export class NeoDetailComponent implements OnInit {
         asteroids.forEach(document => {
           if (document.asteroidId == this.id && document.userId == this.user.uid) {
             this.hasAsteroid = true;
-            console.log("test: ", this.hasAsteroid);
           }
-          console.log(document);
         });
         this.astroSub.unsubscribe();
       });
@@ -71,7 +69,7 @@ export class NeoDetailComponent implements OnInit {
 
   addAsteroid(id) {
     this.userAsteroidService.addAsteroid(id);
-    this.hasAsteroid = true;;
+    this.hasAsteroid = true;
   }
 
   removeAsteroid(id){

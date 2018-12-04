@@ -48,11 +48,11 @@ export class NeoComponent implements OnInit {
   ngOnInit() {
     //userdata ohpalen
     this.authService.userData$.subscribe(data => {
-      console.log("we hebben een user!");
       this.user = data;
     });
     this.getUserFeed();
 
+    //route parameters ophalen
     this.sub = this.route.params.subscribe(params => {
       this.tab = params['tab'];
 

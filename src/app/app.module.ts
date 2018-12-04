@@ -17,6 +17,7 @@ import { InfoModule } from './info/info.module';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NeoModule } from './neo/neo.module';
 import { NeoDetailModule } from './neo-detail/neo-detail.module';
+import { LandsatModule } from './landsat/landsat.module';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -44,6 +45,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     InfoModule,
     NeoModule,
     NeoDetailModule,
+    LandsatModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

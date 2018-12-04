@@ -20,5 +20,12 @@
         <li *ngIf="user"><a [routerLink]="['/neo', 11]" routerLinkActive="active" (click)="closeNav()">My asteroids</a></li>
       </ul>
     </li>
+    <li>
+      <a>Earth surface imagery</a>
+      <ul>
+        <li><a [routerLink]="['/landsat', 0]" routerLinkActive="active" (click)="closeNav()">Feed</a></li>
+        <li *ngIf="user"><a [routerLink]="['/landsat', 11]" routerLinkActive="active" (click)="closeNav()">My images</a></li>
+      </ul>
+    </li>
   </ul>
 </aside>

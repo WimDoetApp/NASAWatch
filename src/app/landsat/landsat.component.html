@@ -1,0 +1,131 @@
+<!-- Titel -->
+<section class="hero is-info">
+  <div class="hero-body">
+    <h1 class="title">Earth surface imagery</h1>
+  </div>
+</section>
+
+<!-- Content -->
+<div class="hero-body">
+  <!-- Switch om te zien welke tab we willen laten zien-->
+  <div [ngSwitch]="currentTab">
+
+    <!-- TAB 1: Browse tab -->
+    <div *ngSwitchCase="0">
+      <div class="columns">
+        <!-- Info -->
+        <div class="column is-one-third">
+          <p>Info pages</p>
+          <div class="tabs is-toggle">
+            <ul>
+              <li (click)="changeInfoTab(1)" id="infoTabControl1" class="infoTabControl is-active"><a>1</a></li>
+              <li (click)="changeInfoTab(2)" id="infoTabControl2" class="infoTabControl"><a>2</a></li>
+              <li (click)="changeInfoTab(3)" id="infoTabControl3" class="infoTabControl"><a>3</a></li>
+              <li (click)="changeInfoTab(4)" id="infoTabControl4" class="infoTabControl"><a>4</a></li>
+              <li (click)="changeInfoTab(5)" id="infoTabControl5" class="infoTabControl"><a>5</a></li>
+            </ul>
+          </div>
+
+          <p id="infoTab1" class="infoTab">Get earth surface imagery taken by the Landsat 8 satellite.</p>
+          <p id="infoTab2" class="infoTab invisible">Selecting too large of a range in dates (spanning over multiple
+            years) can result in an overflow of calls
+            to the NASA api and will not return all data properly!</p>
+          <p id="infoTab3" class="infoTab invisible">The satellite passes over each point on earth roughly once every
+            sixteen days, so cast your web wide
+            enough to be certain not to get an empty result.</p>
+          <p id="infoTab4" class="infoTab invisible">The Landsat 8 satellite was launched February 11th 2013, so
+            requesting imagery from before that date wil
+            obviously return no results.</p>
+          <p id="infoTab5" class="infoTab invisible">Due to a lack of updates to the API, it is currently not providing
+            imagery after May 2017.</p>
+        </div>
+
+        <!-- Invoer -->
+        <div class="column">
+          <form #searchLandsat="ngForm" (ngSubmit)="onSubmitSearchLandsat(searchLandsat.value)">
+            <div class="tile is-parent">
+              <article class="tile is-child notification is-info">
+                <div class="columns">
+                  <div class="column">
+                    <p class="subtitle">
+                      <label class="label has-text-white">Latitude*</label>
+                      <input class="input is-success" step="0.01" type="number" name="lat" ngModel>
+                    </p>
+                  </div>
+                  <div class="column">
+                    <p class="subtitle">
+                      <label class="label has-text-white">Longitude*</label>
+                      <input class="input is-success" step="0.01" type="number" name="lon" ngModel>
+                    </p>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <p class="subtitle">
+                      <label class="label has-text-white">Start date*</label>
+                      <input class="input is-success" type="date" name="begin" ngModel required="true" min="2013-02-11" max="2017-05-31">
+                    </p>
+                  </div>
+                  <div class="column">
+                    <p class="subtitle">
+                      <label class="label has-text-white">End date (default: today)</label>
+                      <input class="input is-success" type="date" name="end" min="2013-02-11" max="2017-05-31" ngModel>
+                    </p>
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <p class="subtitle">
+                      <label class="label has-text-white">Dimensions</label>
+                      <input class="input is-success" min="0.025" max="0.6" step="0.001" type="number" name="dim"
+                        placeholder="0.025" ngModel>
+                    </p>
+                  </div>
+                </div>
+                <p>
+                  <button class="button" type="submit">Submit</button>
+                </p>
+              </article>
+            </div>
+            <p>*Field required</p>
+          </form>
+        </div>
+      </div>
+      <!-- Loader laten zien terwijl we een api request doen -->
+      <div *ngIf="loading">
+        <div class="loader"></div>
+      </div>
+      <!-- De content als we de data van de api ontvangen hebben -->
+      <div [hidden]="loading">
+        <div class="columns is-multiline">
+          <div class="column is-one-third" *ngFor="let image of earthImages">
+            <app-landsat-item [image]="image" [tab]="currentTab"></app-landsat-item>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: My Images TAB-->
+    <div *ngSwitchCase="11">
+      <!-- Info -->
+      <div class="columns">
+        <div class="column">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+              <p>A list of images you saved.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+      <!-- images itereren -->
+      <div *ngIf="noResults">
+        <p>No results!</p>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column is-one-third" *ngFor="let image of userImages">
+          <app-landsat-item [image]="image" [tab]="currentTab"></app-landsat-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

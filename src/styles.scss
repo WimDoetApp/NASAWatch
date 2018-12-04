@@ -65,6 +65,25 @@ nav.navbar {
     background-image: linear-gradient(to right, $light-blue, $red);
 }
 
+/*youtube video*/
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /*16:9*/
+    padding-top: 30px; 
+    height: 0; 
+    overflow: hidden;
+}
+   
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /*Extra*/
 .list-no-style{
     list-style-type: circle !important;
@@ -90,4 +109,9 @@ nav.navbar {
     font-weight: bold;
     padding: 10px;
     border: 1px solid $light-grey;
+    overflow-wrap: break-word;
+}
+
+.invisible{
+    display: none;
 }

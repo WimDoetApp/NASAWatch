@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by4">
+      <img [src]="image.url" alt="image{{ image.id }}">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="content">
+      <div *ngIf="user">
+        <button class="button is-warning is-outlined" type="button" (click)="addImage(image)" *ngIf="!hasImage && tab == 11">Undo</button>
+        <button class="button is-primary is-outlined" type="button" (click)="addImage(image)" *ngIf="!hasImage && tab == 0">Add
+          to my images</button>
+        <button class="button is-danger is-outlined" type="button" (click)="removeImage(image)" *ngIf="hasImage">Remove
+          from my images</button>
+        <br>
+      </div>
+      <i>{{ image.fullDate }}</i>
+    </div>
+  </div>
+</div>

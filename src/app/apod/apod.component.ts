@@ -3,6 +3,7 @@ import { ApodService } from '../_services/apod.service';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 declare var jquery: any;
 declare var $: any;
 
@@ -14,11 +15,11 @@ declare var $: any;
 export class ApodComponent implements OnInit {
 
   loading = false;
+  safeUrl;
   pictureOfTheDay$: Observable<any>;
-  pictureUrl = "";
   media_type = "";
 
-  constructor(private apodService: ApodService) { }
+  constructor(private apodService: ApodService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.getPicture();
@@ -30,6 +31,7 @@ export class ApodComponent implements OnInit {
       .pipe(
         map( data => {
           this.media_type = data.media_type;
+          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(data.url);
           console.log(this.media_type);
 
           return data;
