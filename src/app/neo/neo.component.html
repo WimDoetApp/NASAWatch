@@ -52,8 +52,8 @@
 
           <!-- Pagination -->
           <nav class="pagination" role="navigation" aria-label="pagination">
-            <a class="pagination-previous" (click)="previousPage()">Previous</a>
-            <a class="pagination-next" (click)="nextPage()">Next page</a>
+            <a class="pagination-previous" (click)="previousPage()" [attr.disabled]="currentPage == 1 ? true : null">Previous</a>
+            <a class="pagination-next" (click)="nextPage()" [attr.disabled]="currentPage == numberOfPages-1 ? true : null">Next page</a>
             <ul class="pagination-list">
               <li *ngFor="let page of counter(numberOfPages); let i = index">
                 <a *ngIf="i < 5" [ngClass]="{'is-current has-text-white': currentPage == i+1}" class="pagination-link"
@@ -155,6 +155,9 @@
             </div>
           </div>
           <!-- Asteroids itereren -->
+          <div *ngIf="noResults">
+              <p>You don't have any asteroids saved to your personal list yet.</p>
+          </div>
           <div class="columns is-multiline">
             <div class="column is-one-third" *ngFor="let asteroid of dataUserArray">
               <app-neo-item [asteroid]="asteroid" [tab]="currentTab"></app-neo-item>

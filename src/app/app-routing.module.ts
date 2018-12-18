@@ -13,6 +13,7 @@ import { ErrorComponent } from './error/error.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthTabGuard } from './_guards/auth-tab.guard';
 import { LandsatComponent } from './landsat/landsat.component';
+import { RoverManifestComponent } from './rover-manifest/rover-manifest.component';
 
 const routes: Routes = [
   {path: 'error', component: ErrorComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'apod', component: ApodComponent},
   {path: 'neo/:tab', component: NeoComponent, canActivate: [AuthTabGuard]},
   {path: 'neo-detail/:id', component: NeoDetailComponent},
-  {path: 'landsat/:tab', component: LandsatComponent},
+  {path: 'landsat/:tab', component: LandsatComponent, canActivate: [AuthTabGuard]},
+  {path: 'rovers', component: RoverManifestComponent},
   //homepage = apod
   {path: '', component: ApodComponent},
   //Niet gedefineerde paden doorverwijzen

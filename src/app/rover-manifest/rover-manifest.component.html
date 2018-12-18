@@ -1,0 +1,118 @@
+<!-- Titel -->
+<section class="hero is-info">
+  <div class="hero-body">
+    <h1 class="title">Rover manifests</h1>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="tabs is-toggle">
+      <ul>
+        <li (click)="changeRover(1, 'spirit')" id="roverControl1" class="infoTabControl is-active"><a>Spirit</a></li>
+        <li (click)="changeRover(2, 'curiosity')" id="roverControl2" class="infoTabControl"><a>Curiosity</a></li>
+        <li (click)="changeRover(3, 'opportunity')" id="roverControl3" class="infoTabControl"><a>Opportunity</a></li>
+      </ul>
+    </div>
+
+    <!-- Loader laten zien terwijl we een api request doen -->
+    <div *ngIf="loading">
+      <div class="loader"></div>
+    </div>
+    <!-- De content als we de data van de api ontvangen hebben -->
+    <div [hidden]="loading">
+
+      <h3 class="title is-3">{{ (showData$ | async)?.name }}</h3>
+
+      <!-- algemene info -->
+      <div class="columns">
+        <div class="column">
+          <p><b>Launch date:</b> {{ (showData$ | async)?.launch_date }}</p>
+          <p><b>Landing date:</b> {{ (showData$ | async)?.landing_date }}</p>
+          <p><b>Latest photo date:</b> {{ (showData$ | async)?.max_date }}</p>
+          <p><b>Total photos:</b> {{ (showData$ | async)?.total_photos }}</p>
+        </div>
+      </div>
+
+      <!-- Tabel met alle datums -->
+      <h4 class="title is-4">Photos</h4>
+
+      <table class="table is-striped transparent">
+        <thead>
+          <tr>
+            <th>Sol</th>
+            <th>Total photos</th>
+            <th *ngIf='(showData$ | async)?.name != "Spirit"'>Earth date</th>
+            <th>cameras</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let photo of (showData$ | async)?.photos | slice:((currentPage-1)*pageSize); let i = index">
+            <ng-container *ngIf="i<pageSize">
+              <td>{{ photo.sol }}</td>
+              <td>{{ photo.total_photos }}</td>
+              <td *ngIf="(showData$ | async)?.name != 'Spirit'">{{ photo.earth_date }}</td>
+              <td>
+                <span *ngFor="let camera of photo.cameras">{{ camera }}, </span>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <!-- Pagination -->
+      <nav class="pagination" role="navigation" aria-label="pagination">
+        <a class="pagination-previous" (click)="previousPage()" [attr.disabled]="currentPage == 1 ? true : null">Previous</a>
+        <a class="pagination-next" (click)="nextPage()" [attr.disabled]="currentPage == numberOfPages ? true : null">Next
+          page</a>
+        <ul class="pagination-list">
+          <li *ngFor="let page of counter(numberOfPages); let i = index">
+            <a *ngIf="i < 5" [ngClass]="{'is-current has-text-white': currentPage == i+1}" class="pagination-link"
+              (click)="choosePage(i+1)">{{ i+1 }}</a>
+            <div *ngIf="currentPage == i+1 && currentPage < 6">°</div>
+          </li>
+
+          <ng-container *ngIf="currentPage > 4 && currentPage < 8">
+            <li *ngFor="let page of counter(3); let i = index">
+              <a [ngClass]="{'is-current has-text-white': currentPage == 6+i}" class="pagination-link" (click)="choosePage(6+i)">{{
+                6+i }}</a>
+              <div *ngIf="currentPage == 6+i">°</div>
+            </li>
+          </ng-container>
+
+          <ng-container *ngIf="currentPage > 7">
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link" (click)="choosePage(currentPage-1)">{{
+                currentPage-1 }}</a>
+            </li>
+            <li>
+              <a class="pagination-link is-current has-text-white" aria-label="Goto page 1">{{ currentPage }}</a>
+              <div>°</div>
+            </li>
+            <li *ngIf="currentPage != (numberOfPages)">
+              <a class="pagination-link" (click)="choosePage(currentPage+1)">{{
+                currentPage+1 }}</a>
+            </li>
+          </ng-container>
+
+          <ng-container *ngIf="currentPage < (numberOfPages-3)">
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+
+            <li>
+              <a [ngClass]="{'is-current has-text-white': currentPage == counter(numberOfPages).length}" class="pagination-link"
+                (click)="choosePage(numberOfPages)">{{ counter(numberOfPages).length }}</a>
+              <div *ngIf="currentPage == counter(numberOfPages).length">°</div>
+            </li>
+          </ng-container>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>

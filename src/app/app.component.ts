@@ -58,11 +58,13 @@ export class AppComponent implements OnInit {
       $('#mySidenav').removeClass('is-active');
       $('#burger').removeClass('is-active');
       $('#main').removeClass('lowOpacity');
+      $('.user-item').removeClass('break-word');
     }else{
       document.getElementById("mySidenav").style.width = "250px";
       $('#mySidenav').addClass('is-active');
       $('#burger').addClass('is-active');
       $('#main').addClass('lowOpacity');
+      $('.user-item').addClass('break-word');
     }
   }
 
@@ -71,5 +73,6 @@ export class AppComponent implements OnInit {
     $('#mySidenav').removeClass('is-active');
     $('#burger').removeClass('is-active');
     $('#main').removeClass('lowOpacity');
+    $('.user-item').removeClass('break-word');
   }
 }

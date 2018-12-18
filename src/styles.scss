@@ -65,6 +65,10 @@ nav.navbar {
     background-image: linear-gradient(to right, $light-blue, $red);
 }
 
+.transparent{
+    background-color: whitesmoke;
+}
+
 /*youtube video*/
 .video-container {
     position: relative;
@@ -109,6 +113,9 @@ nav.navbar {
     font-weight: bold;
     padding: 10px;
     border: 1px solid $light-grey;
+}
+
+.break-word{
     overflow-wrap: break-word;
 }
 

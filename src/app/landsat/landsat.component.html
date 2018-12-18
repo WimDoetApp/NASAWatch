@@ -63,7 +63,8 @@
                   <div class="column">
                     <p class="subtitle">
                       <label class="label has-text-white">Start date*</label>
-                      <input class="input is-success" type="date" name="begin" ngModel required="true" min="2013-02-11" max="2017-05-31">
+                      <input class="input is-success" type="date" name="begin" ngModel required="true" min="2013-02-11"
+                        max="2017-05-31">
                     </p>
                   </div>
                   <div class="column">
@@ -97,6 +98,9 @@
       </div>
       <!-- De content als we de data van de api ontvangen hebben -->
       <div [hidden]="loading">
+        <div *ngIf="noResults">
+          <p>No results!</p>
+        </div>
         <div class="columns is-multiline">
           <div class="column is-one-third" *ngFor="let image of earthImages">
             <app-landsat-item [image]="image" [tab]="currentTab"></app-landsat-item>
@@ -117,13 +121,24 @@
           </div>
         </div>
       </div>
-      <!-- images itereren -->
-      <div *ngIf="noResults">
-        <p>No results!</p>
+
+      <!-- loader -->
+      <div *ngIf="loading">
+        <div class="loader"></div>
       </div>
-      <div class="columns is-multiline">
-        <div class="column is-one-third" *ngFor="let image of userImages">
-          <app-landsat-item [image]="image" [tab]="currentTab"></app-landsat-item>
+
+      <!-- images itereren -->
+      <div [hidden]="loading">
+        <div *ngIf="userImages.length == 0">
+          <p>You don't have any images saved to your personal list yet.</p>
+        </div>
+
+        <div *ngIf="userImages.length > 0">
+          <div class="columns is-multiline">
+            <div class="column is-one-third" *ngFor="let image of userImages">
+              <app-landsat-item [image]="image" [tab]="currentTab"></app-landsat-item>
+            </div>
+          </div>
         </div>
       </div>
     </div>

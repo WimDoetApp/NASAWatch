@@ -8,5 +8,28 @@
 <!-- Content -->
 <section class="hero is-light">
     <div class="hero-body">
+        <div class="columns">
+            <div class="column">
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-info">
+                        <p *ngIf="tellerImage == 0">You don't have any images saved to your personal list yet. Start
+                            finding images <a [routerLink]="['/landsat', 0]" routerLinkActive="active">now!</a></p>
+                        <p *ngIf="tellerImage > 0">You have {{ tellerImage }} images saved in your personal list. View
+                            them <a [routerLink]="['/landsat', 11]" routerLinkActive="active">here!</a></p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-info">
+                        <p *ngIf="tellerAsteroid == 0">You don't have any asteroids saved to your personal list yet. Start
+                            finding asteroids <a [routerLink]="['/neo', 0]" routerLinkActive="active">now!</a></p>
+                        <p *ngIf="tellerAsteroid > 0">You have {{ tellerAsteroid }} asteroids saved in your personal list. View
+                            them <a [routerLink]="['/neo', 11]" routerLinkActive="active">here!</a></p>
+                    </article>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

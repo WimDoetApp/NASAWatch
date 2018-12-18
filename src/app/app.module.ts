@@ -22,6 +22,8 @@ import { LandsatModule } from './landsat/landsat.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { RoverManifestModule } from './rover-manifest/rover-manifest.module';
+import { RoverPhotosModule } from './rover-photos/rover-photos.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     NeoModule,
     NeoDetailModule,
     LandsatModule,
+    RoverManifestModule,
+    RoverPhotosModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

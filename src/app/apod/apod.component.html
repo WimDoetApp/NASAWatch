@@ -31,7 +31,8 @@
                         </div>
                     </div>
                     <p class="title">Description</p>
-                    <p>{{ (pictureOfTheDay$ | async)?.explanation }}</p>
+                    <p>{{ (pictureOfTheDay$ | async)?.explanation }}</p><br>
+                    <p>Credit: {{ (pictureOfTheDay$ | async)?.copyright }}</p>
                 </div>
             </div>
         </div>

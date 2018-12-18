@@ -34,6 +34,7 @@ export class NeoComponent implements OnInit {
   //andere
   today = new Date().toISOString().slice(0, 10);
   loading = false;
+  noResults = false;
   pictureUrl = "";
   neoPageSize = "";
   currentPage = 1;
@@ -190,6 +191,10 @@ export class NeoComponent implements OnInit {
           this.asteroidIds.push(document.asteroidId);
         }
       });
+
+      if(this.asteroidIds.length == 0){
+        this.noResults = true;
+      }
 
       //voor elke id de ateroide opzoeken in de api en in een array plaatsen
       this.asteroidIds.forEach(asteroidObservable => {

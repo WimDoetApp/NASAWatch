@@ -52,9 +52,6 @@ export class LandsatComponent implements OnInit {
       this.user = data;
     });
 
-    //images van de user alvast ophalen
-    this.getUserImages();
-
     //route parameters ophalen
     this.sub = this.route.params.subscribe(params => {
       this.tab = params['tab'];
@@ -133,6 +130,7 @@ export class LandsatComponent implements OnInit {
 
   //images van de user ophalen
   getUserImages() {
+    this.loading = true;
     /*Ids van alle opgeslagen images voor de ingelogde user in een feed zetten*/
     this.userImages$ = this.userImageService.getImages();
     //images van de user ophalen en in een array stoppen
@@ -159,16 +157,19 @@ export class LandsatComponent implements OnInit {
             earthImage.dim = image.dim;
 
             this.userImages.push(earthImage);
+            this.loading = false;
           })
+        }else{
+          this.loading = false;
         }
       });
       this.imagerySub.unsubscribe();
     })
-    this.loading = false;
   }
 
   //user images laten zien
   showUserImages() {
+    this.getUserImages();
     this.currentTab = "11";
   }
 

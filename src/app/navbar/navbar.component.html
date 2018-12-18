@@ -27,5 +27,11 @@
         <li *ngIf="user"><a [routerLink]="['/landsat', 11]" routerLinkActive="active" (click)="closeNav()">My images</a></li>
       </ul>
     </li>
+    <li>
+      <a>Mars rovers</a>
+      <ul>
+        <li><a routerLink="/rovers" routerLinkActive="active" (click)="closeNav()">Manifests</a></li>
+      </ul>
+    </li>
   </ul>
 </aside>
