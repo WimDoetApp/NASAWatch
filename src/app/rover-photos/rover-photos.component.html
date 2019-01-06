@@ -1,3 +1,154 @@
-<p>
-  rover-photos works!
-</p>
+<!-- Titel -->
+<section class="hero is-info">
+  <div class="hero-body">
+    <h1 class="title">Mars Rover photos</h1>
+  </div>
+</section>
+
+<!-- Content -->
+<div class="hero-body">
+  <!-- Switch om te zien welke tab we willen laten zien-->
+  <div [ngSwitch]="currentTab">
+
+    <!-- TAB 1: Browse tab -->
+    <div *ngSwitchCase="0">
+      <!-- Tabs selecteren -->
+      <div class="tabs is-toggle">
+        <ul>
+          <li (click)="changeRover(1, 'spirit')" id="roverControl1" class="infoTabControl is-active"><a>Spirit</a></li>
+          <li (click)="changeRover(2, 'curiosity')" id="roverControl2" class="infoTabControl"><a>Curiosity</a></li>
+          <li (click)="changeRover(3, 'opportunity')" id="roverControl3" class="infoTabControl"><a>Opportunity</a></li>
+        </ul>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+              <p>Launch date: {{ launchDate }}</p>
+              <p>Max date: {{ maxDate }}</p>
+              <p>Max sol: {{ maxSol }}</p>
+              <br/>
+              <p>You can search by date or sol for every rover.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="column">
+          <!-- Formulier om datum te kiezen -->
+          <form #selectDate="ngForm" (ngSubmit)="onSubmitDate(selectDate.value)">
+            <div class="tile is-parent">
+              <article class="tile is-child notification is-info">
+                <p class="subtitle">
+                  <label class="label has-text-white">Date</label>
+                  <input class="input is-success" type="date" name="datum" ngModel>
+                </p>
+                <p class="subtitle">
+                    <label class="label has-text-white">Sol</label>
+                    <input class="input is-success" step="1" type="number" name="sol" ngModel>
+                  </p>
+                <p class="subtitle">
+                  <button class="button is-light" type="submit" name="submitDate">Submit date</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="button is-light" type="submit" name="submitSol">Submit sol</button>
+                </p>
+              </article>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Loader laten zien terwijl we een api request doen -->
+      <div *ngIf="loading">
+        <div class="loader"></div>
+      </div>
+      <!-- De content als we de data van de api ontvangen hebben -->
+      <div [hidden]="loading">
+        <div class="columns is-multiline">
+          <div class="column is-one-third" *ngFor="let photo of dataPhotos | slice:((currentPage-1)*pageSize); let i = index">
+            <app-photo-item [photo]="photo" [tab]="currentTab"></app-photo-item>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a class="pagination-previous" (click)="previousPage()" [attr.disabled]="currentPage == 1 ? true : null">Previous</a>
+          <a class="pagination-next" (click)="nextPage()" [attr.disabled]="currentPage == numberOfPages ? true : null">Next
+            page</a>
+          <ul class="pagination-list">
+            <li *ngFor="let page of counter(numberOfPages); let i = index">
+              <a *ngIf="i < 5" [ngClass]="{'is-current has-text-white': currentPage == i+1}" class="pagination-link"
+                (click)="choosePage(i+1)">{{ i+1 }}</a>
+              <div *ngIf="currentPage == i+1 && currentPage < 6">°</div>
+            </li>
+
+            <ng-container *ngIf="currentPage > 4 && currentPage < 8">
+              <li *ngFor="let page of counter(3); let i = index">
+                <a [ngClass]="{'is-current has-text-white': currentPage == 6+i}" class="pagination-link" (click)="choosePage(6+i)">{{
+                  6+i }}</a>
+                <div *ngIf="currentPage == 6+i">°</div>
+              </li>
+            </ng-container>
+
+            <ng-container *ngIf="currentPage > 7">
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                <a class="pagination-link" (click)="choosePage(currentPage-1)">{{
+                  currentPage-1 }}</a>
+              </li>
+              <li>
+                <a class="pagination-link is-current has-text-white" aria-label="Goto page 1">{{ currentPage }}</a>
+                <div>°</div>
+              </li>
+              <li *ngIf="currentPage != (numberOfPages)">
+                <a class="pagination-link" (click)="choosePage(currentPage+1)">{{
+                  currentPage+1 }}</a>
+              </li>
+            </ng-container>
+
+            <ng-container *ngIf="currentPage < (numberOfPages-3)">
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+
+              <li>
+                <a [ngClass]="{'is-current has-text-white': currentPage == counter(numberOfPages).length}" class="pagination-link"
+                  (click)="choosePage(numberOfPages)">{{ counter(numberOfPages).length }}</a>
+                <div *ngIf="currentPage == counter(numberOfPages).length">°</div>
+              </li>
+            </ng-container>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- TAB 2: My Images TAB-->
+    <div *ngSwitchCase="11">
+      <!-- Info -->
+      <div class="columns">
+        <div class="column">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+              <p>A list of photos you saved.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- loader -->
+      <div *ngIf="loading">
+        <div class="loader"></div>
+      </div>
+
+      <!-- images itereren -->
+      <div [hidden]="loading">
+        <div class="columns is-multiline">
+          <div class="column is-one-third" *ngFor="let photo of userPhotos">
+            <app-photo-item [photo]="photo" [tab]="currentTab"></app-photo-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

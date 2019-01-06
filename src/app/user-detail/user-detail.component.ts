@@ -4,6 +4,7 @@ import { User } from '../_interfaces/user';
 import { Observable } from 'rxjs';
 import { UserImageService } from '../_services/user-image.service';
 import { UserAsteroidService } from '../_services/user-asteroid.service';
+import { UserPhotoService } from '../_services/user-photo.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -16,14 +17,17 @@ export class UserDetailComponent implements OnInit {
   //observables
   userImages$: Observable<any>;
   userAsteroids$: Observable<any>;
+  userPhoto$: Observable<any>;
   //tellers
   tellerImage = 0;
   tellerAsteroid = 0;
+  tellerPhoto = 0;
   //sub
   private sub: any;
   private anderesub: any;
+  private derdesub: any;
 
-  constructor(private authService: AuthService, private userImageService: UserImageService, private userAsteroidService: UserAsteroidService) { }
+  constructor(private authService: AuthService, private userImageService: UserImageService, private userAsteroidService: UserAsteroidService, private userPhotoService: UserPhotoService) { }
 
   ngOnInit() {
     this.authService.userData$.subscribe(data => this.user = data);
@@ -33,6 +37,7 @@ export class UserDetailComponent implements OnInit {
   countUserObjects() {
     this.userImages$ = this.userImageService.getImages();
     this.userAsteroids$ = this.userAsteroidService.getAsteroids();
+    this.userPhoto$ = this.userPhotoService.getPhotos();
 
     this.sub = this.userImages$.subscribe(results => {
       results.forEach(result => {
@@ -52,6 +57,16 @@ export class UserDetailComponent implements OnInit {
       });
 
       this.anderesub.unsubscribe();
+    })
+
+    this.derdesub = this.userPhoto$.subscribe(results => {
+      results.forEach(result => {
+        if (result.userId == this.user.uid) {
+          this.tellerPhoto++;
+        }
+      });
+
+      this.derdesub.unsubscribe();
     })
   }
 

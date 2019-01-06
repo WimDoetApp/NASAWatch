@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.swUpdate.available.subscribe(evt => {
       console.log('evt', evt);
-      if (confirm('De website is aangepast. Wil je de nieuwe versie openen?')) {
+      if (confirm('The website has just received an update. Would you like to reload?')) {
         window.location.reload();
       }
     });

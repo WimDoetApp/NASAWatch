@@ -13,11 +13,66 @@ export class RoverService {
 
   constructor(private http: HttpClient) { }
 
-  getManifest$(rover): Observable<any>{
+  getManifest$(rover): Observable<any> {
     const params = new HttpParams()
       .set('api_key', this.API_KEY);
 
-      return this.http.get(this.ROOT_URL + "manifests/" + rover, { params })
+    return this.http.get(this.ROOT_URL + "manifests/" + rover, { params })
+      .pipe(
+        tap(req => console.log('get-request', req)),
+        catchError(
+          (error) => {
+            console.log(error);
+            alert(error.message);
+            return EMPTY;
+          }),
+        share()
+      );
+  }
+
+  getLatestPhotos$(rover): Observable<any> {
+    const params = new HttpParams()
+      .set('api_key', this.API_KEY);
+
+    return this.http.get(this.ROOT_URL + "rovers/" + rover + "/latest_photos", { params })
+      .pipe(
+        tap(req => console.log('get-request', req)),
+        catchError(
+          (error) => {
+            console.log(error);
+            alert(error.message);
+            return EMPTY;
+          }),
+        share()
+      );
+  }
+
+  getPhotosBySol$(rover, sol): Observable<any> {
+    const params = new HttpParams()
+      .set('api_key', this.API_KEY)
+      .set('sol', sol);
+
+    console.log(this.ROOT_URL + "rovers/" + rover + "/photos" + "?api_key=" + this.API_KEY + "&sol=" + sol);
+
+    return this.http.get(this.ROOT_URL + "rovers/" + rover + "/photos", { params })
+      .pipe(
+        tap(req => console.log('get-request', req)),
+        catchError(
+          (error) => {
+            console.log(error);
+            alert(error.message);
+            return EMPTY;
+          }),
+        share()
+      );
+  }
+
+  getPhotosByEarthDate$(rover, earthDate): Observable<any> {
+    const params = new HttpParams()
+      .set('api_key', this.API_KEY)
+      .set('earth_date', earthDate);
+
+    return this.http.get(this.ROOT_URL + "rovers/" + rover + "/photos", { params })
       .pipe(
         tap(req => console.log('get-request', req)),
         catchError(

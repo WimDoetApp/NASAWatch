@@ -31,6 +31,8 @@
       <a>Mars rovers</a>
       <ul>
         <li><a routerLink="/rovers" routerLinkActive="active" (click)="closeNav()">Manifests</a></li>
+        <li><a [routerLink]="['/roverphoto', 0]" routerLinkActive="active" (click)="closeNav()">Photos</a></li>
+        <li *ngIf="user"><a [routerLink]="['/roverphoto', 11]" routerLinkActive="active" (click)="closeNav()">My photos</a></li>
       </ul>
     </li>
   </ul>

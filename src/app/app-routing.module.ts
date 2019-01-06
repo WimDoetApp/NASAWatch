@@ -14,6 +14,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AuthTabGuard } from './_guards/auth-tab.guard';
 import { LandsatComponent } from './landsat/landsat.component';
 import { RoverManifestComponent } from './rover-manifest/rover-manifest.component';
+import { RoverPhotosComponent } from './rover-photos/rover-photos.component';
 
 const routes: Routes = [
   {path: 'error', component: ErrorComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'neo-detail/:id', component: NeoDetailComponent},
   {path: 'landsat/:tab', component: LandsatComponent, canActivate: [AuthTabGuard]},
   {path: 'rovers', component: RoverManifestComponent},
+  {path: 'roverphoto/:tab', component: RoverPhotosComponent, canActivate: [AuthTabGuard]},
   //homepage = apod
   {path: '', component: ApodComponent},
   //Niet gedefineerde paden doorverwijzen

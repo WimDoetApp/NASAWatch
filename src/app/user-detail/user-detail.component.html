@@ -12,9 +12,11 @@
             <div class="column">
                 <div class="tile is-parent">
                     <article class="tile is-child notification is-info">
-                        <p *ngIf="tellerImage == 0">You don't have any images saved to your personal list yet. Start
+                        <p *ngIf="tellerImage == 0">You don't have any landsat images saved to your personal list yet.
+                            Start
                             finding images <a [routerLink]="['/landsat', 0]" routerLinkActive="active">now!</a></p>
-                        <p *ngIf="tellerImage > 0">You have {{ tellerImage }} images saved in your personal list. View
+                        <p *ngIf="tellerImage > 0">You have {{ tellerImage }} landsat images saved in your personal
+                            list. View
                             them <a [routerLink]="['/landsat', 11]" routerLinkActive="active">here!</a></p>
                     </article>
                 </div>
@@ -23,10 +25,25 @@
             <div class="column">
                 <div class="tile is-parent">
                     <article class="tile is-child notification is-info">
-                        <p *ngIf="tellerAsteroid == 0">You don't have any asteroids saved to your personal list yet. Start
+                        <p *ngIf="tellerAsteroid == 0">You don't have any asteroids saved to your personal list yet.
+                            Start
                             finding asteroids <a [routerLink]="['/neo', 0]" routerLinkActive="active">now!</a></p>
-                        <p *ngIf="tellerAsteroid > 0">You have {{ tellerAsteroid }} asteroids saved in your personal list. View
+                        <p *ngIf="tellerAsteroid > 0">You have {{ tellerAsteroid }} asteroids saved in your personal
+                            list. View
                             them <a [routerLink]="['/neo', 11]" routerLinkActive="active">here!</a></p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="tile is-parent">
+                    <article class="tile is-child notification is-info">
+                        <p *ngIf="tellerAsteroid == 0">You don't have any mars rover photos saved to your personal list yet.
+                            Start
+                            finding asteroids <a [routerLink]="['/neo', 0]" routerLinkActive="active">now!</a></p>
+                        <p *ngIf="tellerAsteroid > 0">You have {{ tellerPhoto }} mars rover photos saved in your personal
+                            list. View
+                            them <a [routerLink]="['/roverphoto', 11]" routerLinkActive="active">here!</a></p>
                     </article>
                 </div>
             </div>
