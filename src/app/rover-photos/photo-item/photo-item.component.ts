@@ -4,6 +4,7 @@ import { User } from 'src/app/_interfaces/user';
 import { Observable } from 'rxjs';
 import { UserPhotoService } from 'src/app/_services/user-photo.service';
 import { UserPhoto } from 'src/app/_interfaces/user-photo';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photo-item',
@@ -21,7 +22,9 @@ export class PhotoItemComponent implements OnInit {
   userPhotos$: Observable<any>;
   private imageSub: any;
 
-  constructor(private authService: AuthService, private userPhotoService: UserPhotoService) { }
+  safeUrl;
+
+  constructor(private authService: AuthService, private userPhotoService: UserPhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     //userdata ohpalen
@@ -44,6 +47,8 @@ export class PhotoItemComponent implements OnInit {
       });
       this.imageSub.unsubscribe();
     });
+
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.photo.url);
   }
 
   addPhoto(photo){
